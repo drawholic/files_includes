@@ -64,6 +64,11 @@ void FileNode::read_file()
 		};
 	};
 	input_file.close();
+
+	for(auto it : children)
+	{
+		it->read_file();
+	};
 };
 
 void FileNode::include_files()
@@ -177,11 +182,17 @@ void FileNode::print()
 
 	if(!children.empty())
 	{
-		std::cout << "children: \n";
+		std::cout << "children: ";
+		for(auto i : children)
+		{
+			std::cout << i->get_filename() << ", ";
+		};
+		std::cout << std::endl;
+
 		for(auto i : children)
 		{
 			i->print();
-		};	
+		};
 	};
 	
 };
